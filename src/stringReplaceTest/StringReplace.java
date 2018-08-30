@@ -1,6 +1,6 @@
 package stringReplaceTest;
 /**
- * 只能换第一次出现的，要把所有的都换掉呢？
+ * 只能换第一次出现的，要把所有的都换掉呢？。。。String.replaceAll()........
  * @author cifengwang
  *
  */
@@ -28,34 +28,20 @@ public class StringReplace {
 	}*/
 	
 	public static String numReplace(String number, String oldStr, String newStr) {
-		try {
-			StringBuffer num=new StringBuffer();
-			num.append(number);
-			
-			return num.toString();
-			} catch(Exception e) {
-				return number;
-			}
-	}
-	
-	public static StringBuffer replace(String s,String oldS, String newS, int OffSet) {
-		StringBuffer sb=new StringBuffer();
-		sb.append(s);
-		sb.delete(OffSet, OffSet+oldS.length());
-		sb.insert(OffSet, newS);
-		return sb;
+		number=number.replaceAll(oldStr, newStr);
+		return number;
 	}
 	
 	public static void main(String[] args) {
 		String test="壹拾零万零万零仟零佰零万零零";
 		//String result=numReplace(test,"零零","零");
-		String result=numReplace(test,"零仟","零");
-		result=numReplace(result,"零佰","零");
-		result=numReplace(result,"零亿","零");
-		result=numReplace(result,"零万","万");
-		result=numReplace(result,"零零","零");
+		test=numReplace(test,"零仟","零");
+		test=numReplace(test,"零佰","零");
+		test=numReplace(test,"零亿","零");
+		test=numReplace(test,"零零","零");
 		//result=numReplace(test,"零佰","零");
-		System.out.println(result);
+		test=numReplace(test,"零万","万");
+		System.out.println(test);
 	}
 
 }
