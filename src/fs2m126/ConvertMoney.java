@@ -44,7 +44,7 @@ public class ConvertMoney {
 		StringBuffer temp=new StringBuffer();
 		for(int i=0;i<num.length();i++) {
 			temp.append(STR_UNIT[i]);
-			temp.append(STR_NUM[num.charAt(i)-48]);
+			temp.append(STR_NUM[num.charAt(i)-48]);//返回的是数字的ascii码，0-9是48到57，-48就是从零开始
 		}
 		num=temp.reverse().toString();
 		num=numReplace(num,"零拾","零");
@@ -53,17 +53,21 @@ public class ConvertMoney {
 		num=numReplace(num,"零万","万");
 		num=numReplace(num,"零亿","亿");
 		num=numReplace(num,"零零","零");
-		num=num.substring(0,num.length()-1);
+		//num=num.substring(0,num.length()-1);
 		return num;
 	}
 	
 	public static String numReplace(String number, String oldStr, String newStr) {
-		int tempIndex1=number.indexOf(oldStr.charAt(0));
-		int tempIndex2=number.indexOf(oldStr.charAt(1));
-		if (tempIndex1+1==tempIndex2) {
-			number=number.replace(oldStr, newStr);
-		}
-		return number;
+		try {
+			StringBuffer num=new StringBuffer();
+			num.append(number);
+			int offSet=num.indexOf(oldStr);
+			num.delete(offSet, offSet+oldStr.length());
+			num.insert(offSet, newStr);
+			return num.toString();
+			} catch(Exception e) {
+				return number;
+			}
 	}
 	
 	public static String getDecimal(String num) {
@@ -71,7 +75,7 @@ public class ConvertMoney {
 	}
 	
 	public static void main(String[] args) {
-		String str=convert(1000000);
+		String str=convert(123456);
 		System.out.println(str);
 	}
 

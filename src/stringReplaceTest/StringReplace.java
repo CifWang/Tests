@@ -3,6 +3,7 @@ package stringReplaceTest;
 
 public class StringReplace {
 	
+	/**
 	public static String numReplace(String number, String oldStr, String newStr){
 		StringBuffer num=new StringBuffer();
 		num.append(number);
@@ -11,21 +12,37 @@ public class StringReplace {
 		num.insert(tempIndex, newStr);
 		
 		//System.out.println(tempIndex1);
-		/**
+		
 		System.out.println(tempIndex2);
 		if(tempIndex2-tempIndex1==1) {
 			number=number.replace(oldStr, newStr);
 		}
 		//number=number.replace(oldStr, newStr);
 		return number;
-		*/
+	
 		return num.toString();
+	}*/
+	
+	public static String numReplace(String number, String oldStr, String newStr) {
+		try {
+			StringBuffer num=new StringBuffer();
+			num.append(number);
+			int offSet=num.indexOf(oldStr);
+			num.delete(offSet, offSet+oldStr.length());
+			num.insert(offSet, newStr);
+			return num.toString();
+			} catch(Exception e) {
+				return number;
+			}
 	}
 	
 	public static void main(String[] args) {
 		String test="零佰零仟零万亿";
 		//String result=numReplace(test,"零零","零");
 		String result=numReplace(test,"零仟","零");
+		result=numReplace(result,"零佰","零");
+		result=numReplace(result,"零亿","零");
+		result=numReplace(result,"零万","零");
 		//result=numReplace(test,"零佰","零");
 		System.out.println(result);
 	}
