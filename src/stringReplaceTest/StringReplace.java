@@ -1,5 +1,9 @@
 package stringReplaceTest;
-
+/**
+ * 只能换第一次出现的，要把所有的都换掉呢？
+ * @author cifengwang
+ *
+ */
 
 public class StringReplace {
 	
@@ -27,22 +31,29 @@ public class StringReplace {
 		try {
 			StringBuffer num=new StringBuffer();
 			num.append(number);
-			int offSet=num.indexOf(oldStr);
-			num.delete(offSet, offSet+oldStr.length());
-			num.insert(offSet, newStr);
+			
 			return num.toString();
 			} catch(Exception e) {
 				return number;
 			}
 	}
 	
+	public static StringBuffer replace(String s,String oldS, String newS, int OffSet) {
+		StringBuffer sb=new StringBuffer();
+		sb.append(s);
+		sb.delete(OffSet, OffSet+oldS.length());
+		sb.insert(OffSet, newS);
+		return sb;
+	}
+	
 	public static void main(String[] args) {
-		String test="零佰零仟零万亿";
+		String test="壹拾零万零万零仟零佰零万零零";
 		//String result=numReplace(test,"零零","零");
 		String result=numReplace(test,"零仟","零");
 		result=numReplace(result,"零佰","零");
 		result=numReplace(result,"零亿","零");
-		result=numReplace(result,"零万","零");
+		result=numReplace(result,"零万","万");
+		result=numReplace(result,"零零","零");
 		//result=numReplace(test,"零佰","零");
 		System.out.println(result);
 	}

@@ -48,8 +48,8 @@ public class ConvertMoney {
 		}
 		num=temp.reverse().toString();
 		num=numReplace(num,"零拾","零");
-		num=numReplace(num,"零仟","零");
 		num=numReplace(num,"零佰","零");
+		num=numReplace(num,"零仟","零");
 		num=numReplace(num,"零万","万");
 		num=numReplace(num,"零亿","亿");
 		num=numReplace(num,"零零","零");
@@ -75,7 +75,7 @@ public class ConvertMoney {
 	}
 	
 	public static void main(String[] args) {
-		String str=convert(123456);
+		String str=convert(1000000);
 		System.out.println(str);
 	}
 
