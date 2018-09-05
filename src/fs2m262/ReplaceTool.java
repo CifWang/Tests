@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -108,6 +109,39 @@ public class ReplaceTool extends JFrame{
 		FileReader reader=null;
 		FileWriter writer=null;
 		
+		int flag=0;
+		char[] tmp=new char[1024];
+		StringBuilder sb=new StringBuilder();
+		try {
+			reader=new FileReader(textFile);
+			while((flag=reader.read(tmp))!=-1) {//reader.read()读取输入流中下一个字节，返回0-255范围内的int字节值，如果到流末，没有字节，返回-1
+				sb.append(tmp);
+			}
+			String content=sb.toString().replace(before, after);
+			writer=new FileWriter(textFile);
+			writer.write(content);
+		}catch(FileNotFoundException e1) {
+			e1.printStackTrace();
+		}catch (IOException e2) {
+			e2.printStackTrace();
+		}finally {
+			if(reader!=null) {
+				try {
+					reader.close();
+				}catch (IOException e3) {
+					e3.printStackTrace();
+				}
+			}
+			if(writer!=null) {
+				try {
+					writer.close();
+				}catch (IOException e4) {
+					e4.printStackTrace();
+				}
+			}
+		}
+		JOptionPane.showMessageDialog(this, "字符串替换成功！");
+		return;
 		
 	}
 	
