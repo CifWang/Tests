@@ -1,15 +1,36 @@
 package comTests;
 
 import java.awt.BorderLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class GainAllIPFrame_FrameTest extends JFrame {
+	private JTextArea ta_allIp;
+	public static void main(String[] args) {
+		GainAllIPFrame_FrameTest frame=new GainAllIPFrame_FrameTest();
+		frame.setVisible(true);
+	}
+	
 	public GainAllIPFrame_FrameTest() {
-		//super();
+		super();
+		
+		addWindowListener(new WindowAdapter() {
+            public void windowOpened(final WindowEvent e) {
+                try {
+                    //gainAllIp();
+                    ta_allIp.setText(null);
+                } catch (Exception e1) {
+                    ta_allIp.setText(null);
+                }
+            }
+        });
+		
 		final JFrame frame=new JFrame("获得内网的所有IP地址");
 		//setTitle("获得内网的所有IP地址");
 		frame.setSize(300, 500);
