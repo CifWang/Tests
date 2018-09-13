@@ -3,8 +3,18 @@ package fs2m369;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -62,6 +72,40 @@ public class InternetContentFrame extends JFrame {
 		button.setText("解析网页");
 		panel.add(button);
 		
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				String address=url_input.getText().trim();
+				Collection urlCollection=getURLConnection(address);
+				Iterator it=urlCollection.iterator();
+				while(it.hasNext()) {
+					webinfo.append((String)it.next()+"\n");
+				}
+			}
+		});
+		
+	}
+	
+	public Collection<String> getURLConnection(String urlString){
+		URL url=null;
+		URLConnection conn=null;
+		Collection<String> urlCollection=new ArrayList<String>();
+		
+		try {
+			url=new URL(urlString);
+			conn=url.openConnection();
+			conn.connect();
+			InputStream is=conn.getInputStream();
+			InputStreamReader in=new InputStreamReader(is,"UTF-8");
+			BufferedReader br=new BufferedReader(in);
+			String nextLine=br.readLine();
+			while(nextLine!=null) {
+				urlCollection.add(nextLine);
+				nextLine=br.readLine();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return urlCollection;
 	}
 	
 	public static void main(String[] args) {
