@@ -15,6 +15,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -75,7 +76,7 @@ public class InternetContentFrame extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
 				String address=url_input.getText().trim();
-				Collection urlCollection=getURLConnection(address);
+				List urlCollection=getURLConnection(address);
 				Iterator it=urlCollection.iterator();
 				while(it.hasNext()) {
 					webinfo.append((String)it.next()+"\n");
@@ -85,11 +86,33 @@ public class InternetContentFrame extends JFrame {
 		
 	}
 	
+	/**
 	public Collection<String> getURLConnection(String urlString){
 		URL url=null;
 		URLConnection conn=null;
 		Collection<String> urlCollection=new ArrayList<String>();
-		
+		try {
+			url=new URL(urlString);
+			conn=url.openConnection();
+			conn.connect();
+			InputStream is=conn.getInputStream();
+			InputStreamReader in=new InputStreamReader(is,"UTF-8");
+			BufferedReader br=new BufferedReader(in);
+			String nextLine=br.readLine();
+			while(nextLine!=null) {
+				urlCollection.add(nextLine);
+				nextLine=br.readLine();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return urlCollection;
+	}*/
+	
+	public List<String> getURLConnection(String urlString){
+		URL url=null;
+		URLConnection conn=null;
+		List<String> urlCollection=new ArrayList<String>();
 		try {
 			url=new URL(urlString);
 			conn=url.openConnection();
