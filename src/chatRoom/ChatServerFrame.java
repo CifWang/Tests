@@ -39,11 +39,12 @@ public class ChatServerFrame extends JFrame{
 	private JTextArea ta_info=new JTextArea();
 	Container container;
 	
+	/**
 	public ChatServerFrame(String title) {
 		super(title);
 		container=this.getContentPane();
 		container.add(ta_info,"Center");
-	}
+	}*/
 	
 	/**
 	 * 创建服务器的Socket，去连接用户的Socket，然后启动线程对象，对客户端发送的信息进行处理
@@ -62,6 +63,7 @@ public class ChatServerFrame extends JFrame{
 		}
 	}
 	
+	//内部线程类
 	class ServerThread extends Thread{
 		Socket socket;
 		public ServerThread(Socket socket) {
