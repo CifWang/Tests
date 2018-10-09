@@ -3,14 +3,18 @@ package comTests.socketObject;
 import java.io.Serializable;
 
 public class Student implements Serializable{
-	private int id;
+	private String id;
 	private String name;
-	public Student(int id, String name) {
-		this.id=id;
-		this.name=name;
+	
+	public void setId(String Id) {
+        this.id=Id;
 	}
 	
-	public int getId() {
+	public void setName(String Name) {
+		this.name=Name;
+	}
+	
+	public String getId() {
 		return id;
 	}
 	
